@@ -1,0 +1,42 @@
+﻿@model List<RepositoryViewModel>
+@{
+	ViewData["Title"] = "Repository List";
+}
+
+<h3 class="text-primary">Repository List</h3>
+<br />
+
+@if (Model.Count > 0)
+{
+
+	<table id="tableRepo" class="table table-striped  table-hover table-borderless nowrap" style="width:100%">
+		<thead class="bg-primary">
+			<tr>
+				<th class="text-light">Repository</th>
+				<th class="text-light">Url</th>
+				<th class="text-light">Issue List</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var item in Model)
+			{
+				<tr>
+					<td>@item.RepoName</td>
+					<td>
+						<a href="@item.Url" class="btn btn-sm btn-primary">Repo Url</a>
+					</td>
+					<td>
+						<a href="/github/issues/@item.RepoId/?repoName=@item.RepoName" class="btn btn-sm btn-danger">Issue List Url</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	@section Scripts{
+		<script src="~/app/github/repositories.js" asp-append-version="true"></script>
+	}
+}
+else
+{
+	<p>Sorry no repositories available</p>
+}

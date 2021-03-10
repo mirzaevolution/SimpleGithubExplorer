@@ -1,0 +1,42 @@
+﻿@model List<IssueViewModel>
+@{
+	ViewData["Title"] = "Issue List";
+}
+
+<h3 class="text-primary">Issue List for @ViewBag.RepoName</h3>
+<br />
+
+@if (Model.Count > 0)
+{
+
+	<table id="tableIssue" class="table table-striped  table-hover table-borderless nowrap" style="width:100%">
+		<thead class="bg-primary">
+			<tr>
+				<th class="text-light">Title</th>
+				<th class="text-light">Url</th>
+				<th class="text-light">State</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Title</td>
+					<td>
+						<a href="@item.Url" class="btn btn-sm btn-primary">Issue Url</a>
+					</td>
+					<td>
+						<strong>@item.State</strong>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	@section Scripts{
+		<script src="~/app/github/issues.js" asp-append-version="true"></script>
+	}
+}
+else
+{
+	<p>Sorry no issues available</p>
+}
